@@ -978,9 +978,7 @@ name: bidsapps11
 
         - combined general volumetric and artifact-targeted IQMs ([Pizarro et al., 2016](https://doi.org/10.3389/fninf.2016.00052))
 
---
-
-    - IQMs and visual reports per subject, as well as the whole group
+        - IQMs and visual reports per subject, as well as the whole group
 
 .left[<small>[*Esteban, O., FMRIPREP and MRIQC Focus at Stanford, January 2017](https://www.slideshare.net/OscarEsteban5/fmriprep-mriqc-focus-mriqc)</small>]
 ---
@@ -1342,11 +1340,11 @@ name: bidsapps12
 
        - docker pull poldracklab/fmriprep
 
-       - docker run -ti --rm \ </br>
-         -v filepath/to/data/dir:/data:ro \ </br>
-         -v filepath/to/output/dir:/out \ </br>
-         poldracklab/fmriprep:latest \ </br>
-         /data /out/out \ </br>
+       - docker run -ti --rm \ 
+         -v filepath/to/data/dir:/data:ro \ 
+         -v filepath/to/output/dir:/out \ 
+         poldracklab/fmriprep:latest \ 
+         /data /out/out \ 
          participant
 
 .left[<small>[*Gorgolewski, K. J., presentaion at Stanford, January 2017](https://www.slideshare.net/chrisfilo1/fmriprep-robust-and-easy-to-use-fmri-preprocessing-pipeline)</small>]
@@ -1819,7 +1817,24 @@ name: bidsapps12
 ---
 name: bidsapps12
 
-##[openneuro](https://openneuro.org) and ...
+##[openneuro](https://openneuro.org) and [neurovault](https://neurovault.org) and [openfmri](https://openfmri.org)
+
+</br>
+</br>
+</br>
+
+<img src="images/openneuro.png" width="100%"/>
+
+---
+name: bidsapps12
+
+##[open brain consent form](https://open-brain-consent.readthedocs.io/en/master/)
+
+</br>
+</br>
+</br>
+
+<img src="images/openbrainconsent.png" width="100%"/>
 
 ---
 layout: true
