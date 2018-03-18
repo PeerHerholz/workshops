@@ -31,7 +31,8 @@ RUN bash -c "source activate neuro \
                            holoviews \
                            nilearn \
                            plotly \
-                           scikit-image"
+                           scikit-image \
+                           scipy=0.19"
 
 # Install PdVega
 RUN bash -c "source activate neuro \
@@ -46,7 +47,7 @@ RUN conda create -y -q --name py27 python=2.7 \
                                    ipython \
                                    jupyter \
                                    jupyter_contrib_nbextensions \
-                                   matplotlib=2.1 \
+                                   matplotlib \
                                    mayavi \
                                    nbformat \
                                    nibabel \
@@ -78,7 +79,7 @@ RUN conda create -y -q --name py27 python=2.7 \
 #---------------------------------------
 RUN bash -c "source activate neuro \
     && conda install -y -q jupyter \
-                           matplotlib=2.1 \
+                           matplotlib \
                            scikit-learn \
                            scipy \
                            pandas \
