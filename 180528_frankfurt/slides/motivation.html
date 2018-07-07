@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>workshop motivation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif);
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body {
+        font-family: 'Droid Serif';
+      }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: 400;
+        margin-bottom: 0;
+      }
+      .remark-slide-content h1 { font-size: 3em; }
+      .remark-slide-content h2 { font-size: 2em; }
+      .remark-slide-content h3 { font-size: 1.6em; }
+      .footnote {
+        position: absolute;
+        bottom: 3em;
+      }
+      li p { line-height: 1.25em; }
+      .red { color: #fa0000; }
+      .blue { color: #0000fa; }
+      .green { color: #698b69; }
+      .large { font-size: 2em; }
+      a, a > code {
+        color: rgb(249, 38, 114);
+        text-decoration: none;
+      }
+      code {
+        background: #e7e8e2;
+        border-radius: 5px;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-code-line-highlighted     { background-color: #373832; }
+      .pull-left {
+        float: left;
+        width: 47%;
+      }
+      .pull-right {
+        float: right;
+        width: 47%;
+      }
+      .pull-right ~ p {
+        clear: both;
+      }
+      #slideshow .slide .content code {
+        font-size: 0.8em;
+      }
+      #slideshow .slide .content pre code {
+        font-size: 0.9em;
+        padding: 15px;
+      }
+      .inverse {
+        background: #272822;
+        color: #777872;
+        text-shadow: 0 0 20px #333;
+      }
+      .inverse h1, .inverse h2 {
+        color: #f3f3f3;
+        line-height: 0.8em;
+      }
+
+      /* Slide-specific styling */
+      #slide-inverse .footnote {
+        bottom: 12px;
+        left: 20px;
+      }
+      #slide-how .slides {
+        font-size: 0.9em;
+        position: absolute;
+        top:  151px;
+        right: 140px;
+      }
+      #slide-how .slides h3 {
+        margin-top: 0.2em;
+      }
+      #slide-how .slides .first, #slide-how .slides .second {
+        padding: 1px 20px;
+        height: 90px;
+        width: 120px;
+        -moz-box-shadow: 0 0 10px #777;
+        -webkit-box-shadow: 0 0 10px #777;
+        box-shadow: 0 0 10px #777;
+      }
+      #slide-how .slides .first {
+        background: #fff;
+        position: absolute;
+        top: 20%;
+        left: 20%;
+        z-index: 1;
+      }
+      #slide-how .slides .second {
+        position: relative;
+        background: #fff;
+        z-index: 0;
+      }
+
+      /* Two-column layout */
+      .left-column {
+        color: #777;
+        width: 20%;
+        height: 92%;
+        float: left;
+      }
+        .left-column h2:last-of-type, .left-column h3:last-child {
+          color: #000;
+        }
+      .right-column {
+        width: 75%;
+        float: right;
+        padding-top: 1em;
+      }
+      /* Two-column layout (40% left) */
+      .left-column2 {
+        color: #777;
+        width: 40%;
+        height: 92%;
+        float: left;
+      }
+        .left-column h2:last-of-type, .left-column h3:last-child {
+          color: #000;
+        }
+      .right-column2 {
+        width: 55%;
+        float: right;
+        padding-top: 1em;
+      }
+      /* Two-column layout (60% left) */
+      .left-column3 {
+        color: #777;
+        width: 60%;
+        height: 92%;
+        float: left;
+      }
+        .left-column h2:last-of-type, .left-column h3:last-child {
+          color: #000;
+        }
+      .right-column3 {
+        width: 35%;
+        float: right;
+        padding-top: 1em;
+      }
+      /* Two-column layout (flipped) */
+      .left-column-inv {
+        color: #777;
+        width: 75%;
+        height: 92%;
+        float: left;
+      }
+        .left-column h2:last-of-type, .left-column h3:last-child {
+          color: #000;
+        }
+      .right-column-inv {
+        width: 20%;
+        float: right;
+        padding-top: 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+layout: true
+class: center, middle
+---
+# Open and Reproducible Neuroscience using Python
+<img src="images/nipype_logo.svg" height="300px"/>
+## Frankfurt, May 2018
+##### License: CC0 | Image credit: Arno Klein
+---
+class: center, middle
+#But...why?
+
+--
+
+#Let us tell you some stories...
+
+--
+
+#### this presentation HEAVILY "borrows" from [Chris Gorgolewski's presentations on the respective topics](https://www.slideshare.net/chrisfilo1/towards-open-and-reproducible-neuroscience-in-the-age-of-big-data)
+
+---
+class: center, middle
+.left-column[
+#hubble telescope legacy
+]
+.right-column[
+<img src="images/hubble.png" width="80%"/>
+]
+
+#####https://www.scientificamerican.com/article/how-old-observations-are-building-hubbles-legacy/
+
+---
+class: center, middle
+.left-column[
+#ImageNet
+]
+<img src="images/imagenet.png" width="85%"/>
+#####https://qz.com/1034972/the-data-that-changed-the-direction-of-ai-research-and-possibly-the-world/
+
+---
+class: center, middle
+.left-column[
+#Elon Musk & Tesla's electronic cars
+]
+.right-column[
+<img src="images/tesla_patents.png" width="80%"/>
+#####https://www.tesla.com/blog/all-our-patent-are-belong-you
+]
+
+---
+class: center, middle
+.left-column[
+#google brain
+]
+
+
+<img src="images/google_research.png" width="80%"/>
+#####https://research.google.com/research-outreach.html#/research-outreach
+
+
+---
+class: center, middle
+#Who disovered the structure of the DNA?
+
+---
+class: center, middle
+#Rosalind Franklin and photograph 51
+<img src="images/DNA_RF.png" width="100%"/>
+
+
+---
+### But...we're good, eh?
+
+--
+
+### Hard no!
+---
+### science has a problem!
+<img src="images/science_wrong.png" width="50%"/>
+#####<small>https://www.economist.com/news/leaders/21588069-scientific-research-has-changed-world-now-it-needs-change-itself-how-science-goes-wrong</small>
+---
+### science has a problem!
+<img src="images/science_prob_1.png" width="80%"/>
+
+---
+### science has a problem!
+<img src="images/science_prob_2.png" width="50%"/>
+
+
+#####<small>Begley, C. G., & Ellis, L. M. (2012). Drug development: Raise standards for preclinical cancer research. Nature, 483, 531–533. doi:10.1038/483531a; Prinz, F., Schlange, T., & Asadullah, K. (2011). Believe it or not: how much can we rely on published data on potential drug targets? Nature Reviews Drug Discovery, 10, 712–712. doi:10.1038/nrd3439-c1</small>
+---
+### (neuro)science (we) has a problem!
+<img src="images/fmri_problems.png" width="100%"/>
+
+---
+### (neuro)science (we) has a problem!
+<img src="images/hbp_letter.png" width="100%"/>
+
+---
+class: center, middle
+
+.left-column[
+#### hack your way to scientific glory
+
+]
+.right-column[
+p-hacking works, we do p-hack, and “questionable research
+practices” (QRPs) / p-hacking increase the rate of non-replicable falsepositives
+to an substantial amount
+
+]
+---
+class: center, middle
+
+.left-column[
+#### hack your way to scientific glory
+#### bullshit asymmetry
+]
+.right-column[
+p-hacking works, we do p-hack, and “questionable research
+practices” (QRPs) / p-hacking increase the rate of non-replicable falsepositives
+to an substantial amount
+
+become a scientific rockstar with n=20 nature, neuron, etc. publications ⥊ you
+need a 7000 participant-multilab-collaboration to clean up the mess
+(+ bonus: get a reputation as a boring/second-stringer/uninspired/“flairless”
+replicator)
+
+
+]
+---
+class: center, middle
+
+.left-column[
+#### hack your way to scientific glory
+#### bullshit asymmetry
+#### replication / credibility crisis
+]
+.right-column[
+p-hacking works, we do p-hack, and “questionable research
+practices” (QRPs) / p-hacking increase the rate of non-replicable falsepositives
+to an substantial amount
+
+become a scientific rockstar with n=20 nature, neuron, etc. publications ⥊ you
+need a 7000 participant-multilab-collaboration to clean up the mess
+(+ bonus: get a reputation as a boring/second-stringer/uninspired/“flairless”
+replicator)
+
+large scale replication projects reveal that probably less than half of our
+findings can be replicated; even “bulletproof” effects with hundreds of
+supporting studies break down.
+
+]
+---
+class: center, middle
+
+.left-column[
+#### hack your way to scientific glory
+#### bullshit asymmetry
+#### replication / credibility crisis
+#### who pays?
+]
+.right-column[
+p-hacking works, we do p-hack, and “questionable research
+practices” (QRPs) / p-hacking increase the rate of non-replicable falsepositives
+to an substantial amount
+
+become a scientific rockstar with n=20 nature, neuron, etc. publications ⥊ you
+need a 7000 participant-multilab-collaboration to clean up the mess
+(+ bonus: get a reputation as a boring/second-stringer/uninspired/“flairless”
+replicator)
+
+large scale replication projects reveal that probably less than half of our
+findings can be replicated; even “bulletproof” effects with hundreds of
+supporting studies break down.
+
+society pays at least twice
+
+]
+
+####*[Felix Schönbrodt, talk at Uni Mainz, 2017](https://osf.io/5zbgc/)
+---
+class: center, middle
+
+## What is happening?
+
+--
+
+(un)intentional mistakes </br>
+</br>
+--
+
+the garden of forking paths </br>
+</br>
+--
+
+questionable research practices / p-hacking </br>
+</br>
+--
+
+fraud </br>
+</br>
+--
+
+publication bias </br>
+</br>
+
+####*[Felix Schönbrodt, talk at Uni Mainz, 2017](https://osf.io/5zbgc/)
+
+---
+
+class: center, middle
+##Are we lost?
+
+--
+##What can we do?
+
+---
+
+class: center, middle
+##Open (neuro)science as one (by far not the only) answer
+
+---
+class: center, middle
+##Open (neuro)science as one (by far not the only) answer
+
+<img src="images/open_science_1.png" width="100%"/>
+
+
+---
+class: center, middle
+##Open (neuro)science as one (by far not the only) answer
+
+<img src="images/open_science_2.png" width="100%"/>
+
+##what we cover
+
+---
+class: center, middle
+
+##transparency
+
+open data +
+
+open code +
+
+provenance =
+
+transparency
+
+##reproducibility
+
+data snapshots +
+
+software containers =
+
+reproducibility
+
+######[*Gorgolewski, K. J., talk at MPI Leipzig, December 2017](https://osf.io/vpxrj/)</small>
+
+
+---
+class: center, middle
+
+##benefits of open (neuro)science
+
+.left-column[
+#### faster
+#### cheaper
+#### higher quality
+#### more inclusive & competitive
+]
+.right-column[
+going from hypothesis to answer in a couple of weeks
+
+~$3 mln
+cost of reacquiring data for each of the reuses of OpenfMRI datasets (2017)
+
+</br>
+<img src="images/open_science_data_quality.png" width="100%"/>
+######<small>Wicherts JM, Bakker M, Molenaar D (2011) Willingness to Share Research Data Is Related to the Strength of the Evidence and the Quality of Reporting of Statistical Results. PLoS ONE 6(11): e26828. doi: 10.1371/journal.pone.0026828</small>
+
+same datasets are available to all researchers
+
+.left[<small>[*Gorgolewski, K. J., talk at MPI Leipzig, December 2017](https://osf.io/vpxrj/)</small>]
+]
+
+---
+name: inverse
+layout: true
+class: center, middle, inverse
+---
+# Let's start!
+
+# Questions?
+
+
+    </textarea>
+    <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js" type="text/javascript">
+    </script>
+    <script>
+      var hljs = remark.highlighter.engine;
+    </script>
+    <script src="remark.language.js"></script>
+    <script>
+      var slideshow = remark.create({
+          highlightStyle: 'monokai',
+          highlightLanguage: 'remark',
+          highlightLines: true
+        }) ;
+    </script>
+    <script>
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-1placeholder8-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script');
+        ga.src = 'https://ssl.google-analytics.com/ga.js';
+        var s = document.scripts[0];
+        s.parentNode.insertBefore(ga, s);
+      }());
+    </script>
+  </body>
+</html>

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Jupyter Notebook</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif);
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body {
+        font-family: 'Droid Serif';
+      }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: 400;
+        margin-bottom: 0;
+      }
+      .remark-slide-content h1 { font-size: 3em; }
+      .remark-slide-content h2 { font-size: 2em; }
+      .remark-slide-content h3 { font-size: 1.6em; }
+      .footnote {
+        position: absolute;
+        bottom: 3em;
+      }
+      li p { line-height: 1.25em; }
+      .red { color: #fa0000; }
+      .blue { color: #0000fa; }
+      .green { color: #698b69; }
+      .large { font-size: 2em; }
+      a, a > code {
+        color: rgb(249, 38, 114);
+        text-decoration: none;
+      }
+      code {
+        background: #e7e8e2;
+        border-radius: 5px;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-code-line-highlighted     { background-color: #373832; }
+      .pull-left {
+        float: left;
+        width: 47%;
+      }
+      .pull-right {
+        float: right;
+        width: 47%;
+      }
+      .pull-right ~ p {
+        clear: both;
+      }
+      #slideshow .slide .content code {
+        font-size: 0.8em;
+      }
+      #slideshow .slide .content pre code {
+        font-size: 0.9em;
+        padding: 15px;
+      }
+      .inverse {
+        background: #272822;
+        color: #777872;
+        text-shadow: 0 0 20px #333;
+      }
+      .inverse h1, .inverse h2 {
+        color: #f3f3f3;
+        line-height: 0.8em;
+      }
+
+      /* Slide-specific styling */
+      #slide-inverse .footnote {
+        bottom: 12px;
+        left: 20px;
+      }
+      #slide-how .slides {
+        font-size: 0.9em;
+        position: absolute;
+        top:  151px;
+        right: 140px;
+      }
+      #slide-how .slides h3 {
+        margin-top: 0.2em;
+      }
+      #slide-how .slides .first, #slide-how .slides .second {
+        padding: 1px 20px;
+        height: 90px;
+        width: 120px;
+        -moz-box-shadow: 0 0 10px #777;
+        -webkit-box-shadow: 0 0 10px #777;
+        box-shadow: 0 0 10px #777;
+      }
+      #slide-how .slides .first {
+        background: #fff;
+        position: absolute;
+        top: 20%;
+        left: 20%;
+        z-index: 1;
+      }
+      #slide-how .slides .second {
+        position: relative;
+        background: #fff;
+        z-index: 0;
+      }
+
+      /* Two-column layout */
+      .left-column {
+        color: #777;
+        width: 20%;
+        height: 92%;
+        float: left;
+      }
+        .left-column h2:last-of-type, .left-column h3:last-child {
+          color: #000;
+        }
+      .right-column {
+        width: 75%;
+        float: right;
+        padding-top: 1em;
+      }
+      /* Two-column layout (40% left) */
+      .left-column2 {
+        color: #777;
+        width: 40%;
+        height: 92%;
+        float: left;
+      }
+        .left-column h2:last-of-type, .left-column h3:last-child {
+          color: #000;
+        }
+      .right-column2 {
+        width: 55%;
+        float: right;
+        padding-top: 1em;
+      }
+      /* Two-column layout (60% left) */
+      .left-column3 {
+        color: #777;
+        width: 60%;
+        height: 92%;
+        float: left;
+      }
+        .left-column h2:last-of-type, .left-column h3:last-child {
+          color: #000;
+        }
+      .right-column3 {
+        width: 35%;
+        float: right;
+        padding-top: 1em;
+      }
+      /* Two-column layout (flipped) */
+      .left-column-inv {
+        color: #777;
+        width: 75%;
+        height: 92%;
+        float: left;
+      }
+        .left-column h2:last-of-type, .left-column h3:last-child {
+          color: #000;
+        }
+      .right-column-inv {
+        width: 20%;
+        float: right;
+        padding-top: 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+name: inverse
+layout: true
+class: center, middle, inverse
+---
+# Jupyter Notebook
+### ~30min
+
+---
+name: content
+layout: false
+
+name: intro
+
+## Introduction
+
+There are many ways to program in Python:
+
+  - With a **terminal** and a **text editor**
+
+      - We can recommend [IPython](https://ipython.org/) and [Sublime Text](https://www.sublimetext.com/)
+
+      - But, it's sometimes difficult to keep track of what's happening
+
+--
+
+  - With an **integrated development environment (IDE)** that has a nice graphical user interface (**GUI**), i.e. something that looks like MATLAB
+
+      - Makes transition from other languages easy
+
+      - We can recommend [`Spyder`](https://pythonhosted.org/spyder/)
+
+--
+
+  - With an interactive and dynamic **web application**, such as [Jupyter Notebook](http://jupyter.org/)
+
+      - In our opinion the best way for scientists to learn programming, exploring their data and visualizing and communicating their results
+
+---
+
+name: jupyter
+
+## Jupyter Notebook - to program
+
+An open-source web application that allows you to create and share documents that contain live code, equations, visualizations and narrative text.
+
+Jupyter Notebooks was created for Python, but can also be use for other progamming languages, such as R, Julia, Scala, HTML, etc.
+
+<img src="images/jupyterpreview.png" width="75%" />
+
+---
+
+name: anaconda
+
+## Anaconda - to get the software
+
+The best way to get a good, stable and flexible Python environment on your system is [Anaconda](https://www.anaconda.com/download/#linux).
+
+Anaconda provides you with almost all python packages you need. For the rest use `pip` or `git`.
+
+Anaconda allows you to have multiple environment versions next to each.
+
+For this workshop you don't need Anaconda, as we will be using a Docker environment. But feel free to ask, how to setup your system, so that you don't depend on a Docker image.
+
+---
+
+name: exercise
+
+.left-column[
+
+## Hands On
+### ~10min
+]
+.right-column[
+Please go now through the jupyter notebook [`nipype_tutorial/notebooks/introduction_jupyter-notebook.ipynb`](../../../notebooks/nipype_tutorial/notebooks/introduction_jupyter-notebook.ipynb).
+]
+
+---
+
+name: important
+
+## What is helpful / important to know?
+
+- How to create a new notebook?
+
+- Add a new cell ***above*** with `a` or ***below*** with `b`. Make sure that you escaped the current cell with `ESC`
+
+- Execute a cell with `SHIFT+Enter`
+
+- Switch between text and code with `y` and `m`
+
+- Save Jupyter Notebook as PDF, HTML, python script
+
+- Stop computation with ther stop botton or under `Kernel > Interrupt`
+
+- Restart kernel with `Kernel > Restart`
+
+- Change kernel with `Kernel > Change kernel`
+
+- For anything else, look into `Shortcuts`
+
+- Jupyter notebook also allows you to use a `Terminal`, and therefore install additional software
+
+---
+
+name: whygood
+
+## Why are Jupyter Notebooks great for Research?
+
+1. They increase the learning curve in Python drastically.
+
+--
+2. It's a great tool to share data, results and code and therefore is a great tool for open science and reproducible research.
+
+    - See for example the [LIGO results](https://losc.ligo.org/s/events/GW150914/LOSC_Event_tutorial_GW150914.html)
+
+--
+3. It's a great teaching tool
+
+    - Interactive Notebooks via [binder](https://mybinder.org/), for [example](https://mybinder.org/v2/gh/miykael/create_fake_fmri_results/master)
+
+    - See this workshop (hopefully)
+
+---
+layout: true
+class: center, middle, inverse
+---
+name: questions
+
+# Questions?
+
+    </textarea>
+    <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js" type="text/javascript">
+    </script>
+    <script>
+      var hljs = remark.highlighter.engine;
+    </script>
+    <script src="remark.language.js"></script>
+    <script>
+      var slideshow = remark.create({
+          highlightStyle: 'monokai',
+          highlightLanguage: 'remark',
+          highlightLines: true
+        }) ;
+    </script>
+    <script>
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-1placeholder8-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script');
+        ga.src = 'https://ssl.google-analytics.com/ga.js';
+        var s = document.scripts[0];
+        s.parentNode.insertBefore(ga, s);
+      }());
+    </script>
+  </body>
+</html>

@@ -1,0 +1,1859 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Data management and sharing</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif);
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body {
+        font-family: 'Droid Serif';
+      }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: 400;
+        margin-bottom: 0;
+      }
+      .remark-slide-content h1 { font-size: 3em; }
+      .remark-slide-content h2 { font-size: 2em; }
+      .remark-slide-content h3 { font-size: 1.6em; }
+      .footnote {
+        position: absolute;
+        bottom: 3em;
+      }
+      li p { line-height: 1.25em; }
+      .red { color: #fa0000; }
+      .blue { color: #0000fa; }
+      .green { color: #698b69; }
+      .large { font-size: 2em; }
+      a, a > code {
+        color: rgb(249, 38, 114);
+        text-decoration: none;
+      }
+      code {
+        background: #e7e8e2;
+        border-radius: 5px;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-code-line-highlighted     { background-color: #373832; }
+      .pull-left {
+        float: left;
+        width: 47%;
+      }
+      .pull-right {
+        float: right;
+        width: 47%;
+      }
+      .pull-right ~ p {
+        clear: both;
+      }
+      #slideshow .slide .content code {
+        font-size: 0.8em;
+      }
+      #slideshow .slide .content pre code {
+        font-size: 0.9em;
+        padding: 15px;
+      }
+      .inverse {
+        background: #272822;
+        color: #777872;
+        text-shadow: 0 0 20px #333;
+      }
+      .inverse h1, .inverse h2 {
+        color: #f3f3f3;
+        line-height: 0.8em;
+      }
+
+      /* Slide-specific styling */
+      #slide-inverse .footnote {
+        bottom: 12px;
+        left: 20px;
+      }
+      #slide-how .slides {
+        font-size: 0.9em;
+        position: absolute;
+        top:  151px;
+        right: 140px;
+      }
+      #slide-how .slides h3 {
+        margin-top: 0.2em;
+      }
+      #slide-how .slides .first, #slide-how .slides .second {
+        padding: 1px 20px;
+        height: 90px;
+        width: 120px;
+        -moz-box-shadow: 0 0 10px #777;
+        -webkit-box-shadow: 0 0 10px #777;
+        box-shadow: 0 0 10px #777;
+      }
+      #slide-how .slides .first {
+        background: #fff;
+        position: absolute;
+        top: 20%;
+        left: 20%;
+        z-index: 1;
+      }
+      #slide-how .slides .second {
+        position: relative;
+        background: #fff;
+        z-index: 0;
+      }
+
+      /* Two-column layout */
+      .left-column {
+        color: #777;
+        width: 20%;
+        height: 92%;
+        float: left;
+      }
+        .left-column h2:last-of-type, .left-column h3:last-child {
+          color: #000;
+        }
+      .right-column {
+        width: 75%;
+        float: right;
+        padding-top: 1em;
+      }
+      /* Two-column layout (40% left) */
+      .left-column2 {
+        color: #777;
+        width: 40%;
+        height: 92%;
+        float: left;
+      }
+        .left-column h2:last-of-type, .left-column h3:last-child {
+          color: #000;
+        }
+      .right-column2 {
+        width: 55%;
+        float: right;
+        padding-top: 1em;
+      }
+      /* Two-column layout (60% left) */
+      .left-column3 {
+        color: #777;
+        width: 60%;
+        height: 92%;
+        float: left;
+      }
+        .left-column h2:last-of-type, .left-column h3:last-child {
+          color: #000;
+        }
+      .right-column3 {
+        width: 35%;
+        float: right;
+        padding-top: 1em;
+      }
+      /* Two-column layout (flipped) */
+      .left-column-inv {
+        color: #777;
+        width: 75%;
+        height: 92%;
+        float: left;
+      }
+        .left-column h2:last-of-type, .left-column h3:last-child {
+          color: #000;
+        }
+      .right-column-inv {
+        width: 20%;
+        float: right;
+        padding-top: 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+name: inverse
+layout: true
+class: center, middle, inverse
+---
+# Data management and sharing
+### ~1,5 h
+
+#### this presentation HEAVILY "borrows" from [Chris Gorgolewski's presentations on the respective topics](https://www.slideshare.net/chrisfilo1/towards-open-and-reproducible-neuroscience-in-the-age-of-big-data), [the 2017 nipype workshop and hackweek](http://nipy.org/workshops/2017-03-boston/index.html), as well as the mentioned tools'/programs' websites and docs
+
+---
+
+name: content
+class: center, middle
+layout: false
+## Roadmap
+
+### [Data and BIDS](#datamanage)
+### [BIDS converters](#heudiconv)
+### [BIDS apps](#bidsapps)
+### [neurodocker](#neurodocker)
+### [neurovault and openneuro](#cloudsystems)
+### [git](#git)
+### [datalad](#datalad)
+### [but why?](#benefits)
+
+
+---
+
+name: content
+layout: false
+
+name: intro
+
+## introduction
+
+data management:
+
+  - How do you manage your data?
+
+--
+
+      - everyone uses different methods, approaches or even programs
+
+      - data management includes: storage, structure, meta data, version control, ...
+
+--
+
+data sharing:
+
+  - Do you share your data and if so, how?
+
+--
+
+      - data sharing is crucial for science, no matter if on a small (local colleagues) or large scale (openly on the web)
+
+      - data sharing becomes more and more mandatory, journals and funding agencies demand the (raw) data to be publicly available (if you like it or not, but trust us: it's easy, doesn't mean any harm and is the right thing to do)
+
+--
+
+combining both we'll ease up your lab life and further increase the credibility of (neuro)science!
+
+---
+
+name: intro2
+
+## data and BIDS
+
+as mentioned before everyone uses different approaches, but the thing is that heterogenetiy in data management causes problems and incoveniences:
+
+--
+
+  - it's hard for others to understand and get the gist of your data and keep track of changes, etc. (even for you sometimes)
+
+--
+
+  - unnecessary meta data input
+
+--
+
+  - codes / scripts have to be adapted
+
+--
+
+  - hugh effort to automate workflows and no way to automatically validate data sets
+
+--
+
+  - sharing data becomes a hustle
+
+
+Are we doomed, forced to live in a world of uncurated and unloved data sets? Well, worry no more - BIDS to the rescue!
+
+---
+
+name: datamanage
+
+## data and BIDS
+
+### BIDS - Brain Imaging Data Structure
+
+--> a new standard for organizing human neuroimaging datasets
+
+--
+
+  - principles
+
+    1. adoption is crucial
+
+    2. don't reinvent the wheel
+
+    3. some metadata is better than no metadata
+
+    4. don't rely on external software [databases] or complicated file formats [RDF]
+
+    5. aim to capture 80% of experiment but give the remaining 20% space to extend the standard
+
+.left[<small>[*Gorgolewski, K. J., talk at NIH and MIT, January 2017](https://www.slideshare.net/chrisfilo1/towards-open-and-reproducible-neuroscience-in-the-age-of-big-data)</small>]
+
+---
+
+name: datamanage
+
+## data and BIDS
+
+### BIDS - Brain Imaging Data Structure
+
+--> a new standard for organizing human neuroimaging datasets
+
+  - who should use it?
+
+    1. lab PIs - it will make handling over one dataset from one student/postdoc to another super easy
+
+    2. workflow developers - it's very easy to write and extend pipelines expecting a particular file organization
+
+    3. database curators - accepting one data format eases up curation big time
+
+--
+    4. YOU
+
+.left[<small>[*Gorgolewski, K. J., talk at NIH and MIT, January 2017](https://www.slideshare.net/chrisfilo1/towards-open-and-reproducible-neuroscience-in-the-age-of-big-data)</small>]
+
+
+---
+
+name: datamanage2
+
+## data and BIDS
+
+### BIDS - Brain Imaging Data Structure
+
+--> dataset structure
+
+<img src="images/data2bids.jpg" width="100%" />
+.right[*Gorgolewski, K. J. et al. 2016*]
+
+---
+
+name: datamanage3
+
+## data and BIDS
+
+### BIDS - Brain Imaging Data Structure
+
+--> WHAT'S IN THAT BOX ? Sorry, dataset...
+
+<img src="images/bids_structure_1.png" width="100%" />
+.right[*Gorgolewski, K. J. et al. 2016*]
+
+---
+
+name: datamanage4
+
+## data and BIDS
+
+### BIDS - Brain Imaging Data Structure
+
+--> WHAT'S IN THAT BOX ? Sorry, dataset... - participant information
+
+<img src="images/bids_structure_part.png" width="100%" />
+.right[*Gorgolewski, K. J. et al. 2016*]
+
+---
+
+name: datamanage4
+
+## data and BIDS
+
+### BIDS - Brain Imaging Data Structure
+
+--> WHAT'S IN THAT BOX ? Sorry, dataset...  - neuroimaging files
+
+<img src="images/bids_structure_nifti.png" width="100%" />
+.right[*Gorgolewski, K. J. et al. 2016*]
+
+---
+
+name: datamanage5
+
+## data and BIDS
+
+### BIDS - Brain Imaging Data Structure
+
+--> WHAT'S IN THAT BOX ? Sorry, dataset...   - sequence specific .json files
+
+<img src="images/bids_structure_json.png" width="100%" />
+.right[*Gorgolewski, K. J. et al. 2016*]
+
+---
+
+name: datamanage6
+
+## data and BIDS
+
+### BIDS - Brain Imaging Data Structure
+
+--> getting in shape (your data, not you)
+
+--
+
+  - two general possibilities:
+
+--
+    1. data already converted and no access to DICOMS
+
+       - well, shit happens, eh?
+       - write a code snippet that reorganizes and renames the data or do it the old fashioned way (copy / paste)
+--
+
+    2. data already converted and still access to DICOMS OR data didn't converted from DICOM yet
+
+       - coolio, both cases are very well suited for the application of a BIDS converter
+       - this is the preferred case, as BIDS converters extract a vast amount of important metadata
+
+---
+
+name: heudiconv
+
+## data and BIDS
+
+### BIDS - Brain Imaging Data Structure
+
+--> getting in shape using BIDS converters:
+
+  - [AFNI BIDS-tools](https://github.com/nih-fmrif/bids-b0-tools)
+  - [BIDS2ISATab](https://github.com/INCF/BIDS2ISATab)
+  - [BIDSto3col](https://github.com/INCF/bidsutils/tree/master/BIDSto3col)
+  - [BIDS2NDA](https://github.com/INCF/BIDS2NDA)
+  - [bidskit](https://github.com/jmtyszka/bidskit)
+  - [dac2bids](https://github.com/dangom/dac2bids)
+  - [Dcm2Bids](https://github.com/cbedetti/Dcm2Bids)
+  - [DCM2NIIx](https://github.com/neurolabusc/dcm2niix)
+  - [DICM2NII](https://de.mathworks.com/matlabcentral/fileexchange/42997-dicom-to-nifti-converter--nifti-tool-and-viewer)
+  - [HeuDiConv](https://github.com/nipy/heudiconv)
+  - [OpenfMRI2BIDS](https://github.com/INCF/openfmri2bids)
+  - [ReproIn](https://github.com/ReproNim/reproin)(HeuDiConv-based turnkey solution)
+  - [bids2xar](https://github.com/lwallace23/bids2xar)(for XNAT import)
+  - [XNAT2BIDS](https://github.com/kamillipi/2bids)
+  - [Horos (Osirix) export plugin](https://github.com/mslw/horos-bids-output)
+
+---
+
+name: heudiconv2
+
+## data and BIDS
+
+### BIDS - Brain Imaging Data Structure
+
+--> we're gonna focus and try [HeuDiConv](https://github.com/nipy/heudiconv)
+
+<img src="images/heudiconv.png" width="100%" />
+
+--
+
+  - getting [HeuDiConv](https://github.com/nipy/heudiconv)
+
+    - with docker it's as easy as `docker pull nipy/heudiconv:latest`
+
+    - without it, you'll need theses requirements: [`python 2.7`](https://www.python.org/downloads/release/python-2714/), [`nipype`](http://nipype.readthedocs.io/en/latest/), [`dcmtack`](https://github.com/moloney/dcmstack), [`dcm2niix`](https://github.com/rordenlab/dcm2niix)
+
+---
+
+
+name: heudiconv3
+
+.left-column[
+
+## Hands On
+## [HeuDiConv](https://github.com/nipy/heudiconv)
+### ~10min
+]
+.right-column[
+Prerequisites:
+
+  - `docker pull nipy/heudiconv:latest`
+  - `jupyter notebook` (for nice viewing)
+  - grab the data using `datalad` (more to that later)
+
+```
+$ docker run -it --rm -v /path/to/store/dicoms:/data \
+    --entrypoint=bash nipy/heudiconv:latest
+
+# Inside container
+> source activate neuro && cd /data
+> git clone http://datasets.datalad.org/dicoms/dartmouth-phantoms/PHANTOM1_3/.git
+> cd PHANTOM1_3
+
+# ensure all the data is downloaded for the demo to work!
+> datalad get -J6 YAROSLAV_DBIC-TEST1/
+> exit
+```
+
+Please open this presentation on your machine to follow the hands on (for easy copy / paste).
+
+.left[<small>[*from the 2017 nipype workshop and hackweek, March 2017](http://nipy.org/workshops/2017-03-boston/lectures/bids-heudiconv/#1)</small>]
+
+]
+
+---
+name: conversion
+### Sample conversion
+
+Start out running heudiconv without any converter, just passing in DICOMs.
+
+```bash
+docker run --rm -it -v /path/to/dicoms:/data:ro \
+    -v /path/to/output/directory:/output nipy/heudiconv:latest
+```
+
+---
+### Sample conversion
+
+Start out running heudiconv without any converter, just passing in DICOMs.
+
+```bash
+docker run --rm -it -v /path/to/dicoms:/data:ro \
+    -v /path/to/output/directory:/output nipy/heudiconv:latest \
+    -d /data/{subject}/YAROSLAV_DBIC-TEST1/*/*/*IMA -s PHANTOM1_3
+```
+
+---
+### Sample conversion
+
+Start out running heudiconv without any converter, just passing in DICOMs.
+
+```bash
+docker run --rm -it -v /path/to/dicoms:/data:ro \
+    -v /path/to/output/directory:/output nipy/heudiconv:latest \
+    -d /data/{subject}/YAROSLAV_DBIC-TEST1/*/*/*IMA -s PHANTOM1_3 \
+    -f /src/heudiconv/heuristics/convertall.py -c none -o /output
+```
+
+---
+layout: false
+### Sample conversion
+
+Once run, you should now have a directory with your subject, and a sub-directory `.heudiconv`.
+
+- Within `.heudiconv`, there will be a directory with your subject ID, and a subdirectory `info`. Inside this, you can see a `dicominfo.tsv` - we'll be using the information here to convert to a file structure (BIDS)
+
+- The full specifications for BIDS can be found [here](http://bids.neuroimaging.io/bids_spec1.0.1.pdf)
+
+---
+### The heuristic file
+
+```python
+import os
+
+def create_key(template, outtype=('nii.gz',), annotation_classes=None):
+    if template is None or not template:
+        raise ValueError('Template must be a valid format string')
+    return template, outtype, annotation_classes
+
+def infotodict(seqinfo):
+    """Heuristic evaluator for determining which runs belong where
+
+    allowed template fields - follow python string module:
+
+    item: index within category
+    subject: participant id
+    seqitem: run number during scanning
+    subindex: sub index within group
+    """
+
+    data = create_key('run{item:03d}')
+
+    info = {data: []}
+
+    for s in seqinfo:
+        info[data].append(s.series_id)
+    return info
+```
+---
+### Creating heuristic keys
+
+- Keys define type of scan
+
+- Let's extract T1, diffusion, and rest scans
+
+--
+ex.
+```python
+t1w = create_key('sub-{subject}/anat/sub-{subject}_T1w')
+```
+
+--
+
+```python
+def infotodict(seqinfo):
+    """Heuristic evaluator for determining which runs belong where
+
+    allowed template fields - follow python string module:
+
+    item: index within category
+    subject: participant id
+    seqitem: run number during scanning
+    subindex: sub index within group
+    """
+    # paths done in BIDS format
+    t1w = create_key('sub-{subject}/anat/sub-{subject}_T1w')
+    dwi = create_key('sub-{subject}/dwi/sub-{subject}_run-{item:01d}_dwi')
+    rest = create_key('sub-{subject}/func/sub-{subject}_task-rest_rec-{rec}_run-{item:01d}_bold')
+
+    info = {t1w: [], dwi: [], rest: []}
+```
+---
+### Sequence Info
+
+  - And now for each key, we will look at the `dicominfo.tsv` and set a unique criteria that only that scan will meet.
+
+--
+
+```python
+for idx, s in enumerate(seqinfo):
+   # s is a namedtuple with fields equal to the names of the columns
+   # found in the dicominfo.tsv file
+```
+
+---
+### Sequence Info
+
+  - And now for each key, we will look at the `dicominfo.tsv` and set a unique criteria that only that scan will meet.
+
+
+```python
+for idx, s in enumerate(seqinfo): # each row of dicominfo.tsv
+    if (sl == 176) and (s.dim4 == 1) and ('t1' in s.protocol_name):
+      info[t1w] = [s.series_id] # assign if a single scan meets criteria
+```
+
+---
+### Handling multiple runs
+
+```python
+for idx, s in enumerate(seqinfo): # each row of dicominfo.tsv
+    if (s.dim3 == 176) and (s.dim4 == 1) and ('t1' in s.protocol_name):
+      info[t1w] = [s.series_id] # assign if a single scan meets criteria
+```
+--
+
+- Notice there are two diffusion scans shown in DICOM info
+
+---
+### Handling multiple runs
+
+```python
+for idx, s in enumerate(seqinfo): # each row of dicominfo.tsv
+    if (s.dim3 == 176) and (s.dim4 == 1) and ('t1' in s.protocol_name):
+      info[t1w] = [s.series_id] # assign if a single scan meets criteria
+    if (11 <= s.dim3 <= 22) and (s.dim4 == 1) and ('dti' in s.protocol_name):
+      info[dwi].append(s.series_id) # append if multiple scans meet criteria
+```
+
+- Notice there are two diffusion scans shown in DICOM info
+
+---
+### Using custom formatting conditionally
+
+```python
+for idx, s in enumerate(seqinfo): # each row of dicominfo.tsv
+    if (s.dim3 == 176) and (s.dim4 == 1) and ('t1' in s.protocol_name):
+      info[t1w] = [s.series_id] # assign if a single scan meets criteria
+    if (11 <= s.dim3 <= 22) and (s.dim4 == 1) and ('dti' in s.protocol_name):
+      info[dwi].append(s.series_id) # append if multiple scans meet criteria
+```
+
+--
+
+- Extract and label if resting state scans are motion corrected
+
+---
+### Using custom formatting conditionally
+
+```python
+for idx, s in enumerate(seqinfo): # each row of dicominfo.tsv
+    if (s.dim3 == 176) and (s.dim4 == 1) and ('t1' in s.protocol_name):
+      info[t1w] = [s.series_id] # assign if a single scan meets criteria
+    if (11 <= s.dim3 <= 22) and (s.dim4 == 1) and ('dti' in s.protocol_name):
+      info[dwi].append(s.series_id) # append if multiple scans meet criteria
+    if (s.dim4 > 10) and ('taskrest' in s.protocol_name):
+      if s.is_motion_corrected: # motion corrected
+        # catch
+      else:
+        # catch
+```
+
+- Extract and label if resting state scans are motion corrected
+
+---
+### Using custom formatting conditionally
+
+```python
+for idx, s in enumerate(seqinfo): # each row of dicominfo.tsv
+    if (s.dim3 == 176) and (s.dim4 == 1) and ('t1' in s.protocol_name):
+      info[t1w] = [s.series_id] # assign if a single scan meets criteria
+    if (11 <= s.dim3 <= 22) and (s.dim4 == 1) and ('dti' in s.protocol_name):
+      info[dwi].append(s.series_id) # append if multiple scans meet criteria
+    if (s.dim4 > 10) and ('taskrest' in s.protocol_name):
+      if s.is_motion_corrected: # motion corrected
+        info[rest].append({'item': s.series_id, 'rec': 'corrected'})
+      else:
+        info[rest].append({'item': s.series_id, 'rec': 'uncorrected'})
+```
+
+- Extract and label if resting state scans are motion corrected
+
+---
+### Our finished heuristic (`phantom_heuristic.py`)
+
+```python
+import os
+
+def create_key(template, outtype=('nii.gz',), annotation_classes=None):
+    if template is None or not template:
+        raise ValueError('Template must be a valid format string')
+    return template, outtype, annotation_classes
+
+def infotodict(seqinfo):
+
+    t1w = create_key('sub-{subject}/anat/sub-{subject}_T1w')
+    dwi = create_key('sub-{subject}/dwi/sub-{subject}_run-{item:01d}_dwi')
+    rest = create_key('sub-{subject}/func/sub-{subject}_task-rest_rec-{rec}_run-{item:01d}_bold')
+
+    info = {t1w: [], dwi: [], rest: []}
+
+    for s in seqinfo:
+        if (s.dim3 == 176) and (s.dim4 == 1) and ('t1' in s.protocol_name):
+          info[t1w] = [s.series_id] # assign if a single series meets criteria
+        if (11 <= s.dim3 <= 22) and (s.dim4 == 1) and ('dti' in s.protocol_name):
+          info[dwi].append(s.series_id) # append if multiple series meet criteria
+        if (s.dim4 > 10) and ('taskrest' in s.protocol_name):
+            if s.is_motion_corrected: # exclude non motion corrected series
+                info[rest].append({'item': s.series_id, 'rec': 'corrected'})
+            else:
+                info[rest].append({'item': s.series_id, 'rec': 'uncorrected'})
+    return info
+```
+
+---
+### Changing our docker command
+
+```bash
+docker run --rm -it -v /path/to/dicoms:/data:ro \
+    -v /path/to/output/directory:/output nipy/heudiconv:latest \
+-d /data/{subject}/YAROSLAV_DBIC-TEST1/*/*/*IMA -s PHANTOM1_3 \
+-f /src/heudiconv/heuristics/convertall.py -c none -o /output
+```
+
+---
+### Changing our docker command
+
+```bash
+docker run --rm -it -v /path/to/dicoms:/data:ro \
+    -v /path/to/output/directory:/output nipy/heudiconv:latest \
+-d /data/{subject}/YAROSLAV_DBIC-TEST1/*/*/*IMA -s PHANTOM1_3 \
+-f /data/phantom_heuristic.py -c none -o /output
+```
+
+---
+### Changing our docker command
+
+```bash
+docker run --rm -it -v /path/to/dicoms:/data:ro \
+    -v /path/to/output/directory:/output nipy/heudiconv:latest \
+-d /data/{subject}/YAROSLAV_DBIC-TEST1/*/*/*IMA -s PHANTOM1_3 \
+-f /data/phantom_heuristic.py -c dcm2niix -o /output
+```
+
+---
+### Updated docker command
+
+```bash
+docker run --rm -it -v /path/to/dicoms:/data:ro \
+    -v /path/to/output/directory:/output nipy/heudiconv:latest \
+-d /data/{subject}/YAROSLAV_DBIC-TEST1/*/*/*IMA -s PHANTOM1_3 \
+-f /data/phantom_heuristic.py -c dcm2niix -b -o /output
+```
+
+--
+
+- Clear old output directory
+- Run the docker command!
+- Something missing? Double check your `heuristic` and `dicominfo.tsv`!
+
+---
+name: extrasteps
+
+## data and BIDS
+
+### BIDS - Brain Imaging Data Structure
+
+--> Is it BIDS yet?
+
+Let's check using the [BIDS-validator](http://incf.github.io/bids-validator):
+- [web validator](http://incf.github.io/bids-validator/)
+  - open [Google Chrome](https://www.google.com/chrome/) or [Mozilla Firefox](https://www.mozilla.org/en-US/firefox/new/) (currently the only supported browsers)
+  - Go to [http://incf.github.io/bids-validator/](https://github.com/INCF/bids-validator) and select a folder with your BIDs dataset. If the validator seems to be working longer than couple of minutes please open [developer tools](https://developer.chrome.com/devtools) and report the error at [https://github.com/INCF/bids-validator/issues](https://github.com/INCF/bids-validator/issues)
+- command line version - package
+  - install [node.js](https://nodejs.org/en/)
+  - get the bids-validator package using `pip` : `pip install -g bids-validator` & then run it to validate your dataset
+- command line version - docker
+  - get the docker image: `docker pull bids/validator`
+  - run `docker run -ti --rm -v /path/to/data:/data:ro bids/validator /data`
+
+---
+name: nowwhat
+### Now what?
+
+#### That sounds cool and fancy, but how to make use of BIDS?
+
+#### 1. BIDS apps
+
+<img src="images/bids-apps.png" width="75%" />
+
+#### 2. pyBIDS - a Python API for working with BIDS datasets
+
+---
+
+name: bidsapps
+### data and BIDS
+
+#### BIDS apps - there's really an app for everything these days, isn't it?
+
+--
+
+- BIDS apps are portable neuroimage pipelines that support BIDS datasets
+
+--
+
+- each BIDS app has the same core set of command line arguments, making them easy to run and integrate into automated platforms
+
+--
+
+- BIDS apps are constructed in a way that does not depend on any software outside of the image other than the container engine
+
+--
+
+- BIDS apps are deposited in the Docker Hub repository, making them openly accessible
+
+--
+
+- each app is versioned and all of the historical versions are available to download (easy to switch between versions)
+
+--
+
+- by reporting the BIDS App name and version in a manuscript, authors can provide others with the ability to exactly replicate their analysis
+  workflow
+
+--
+
+- works on linux, macOS, windows
+
+--
+
+- can be transformed to singularity containers for applications on HPCs
+
+.left[<small>[*Gorgolewski, K. J., talk at NIH and MIT, January 2017](https://www.slideshare.net/chrisfilo1/towards-open-and-reproducible-neuroscience-in-the-age-of-big-data) and [BIDS apps website](http://bids-apps.neuroimaging.io/about/)</small>]
+
+---
+
+name: bidsapps2
+### data and BIDS
+
+#### BIDS apps - there's really an app for everything these days, isn't it?
+
+<img src="images/bids-apps-structure.png" width="100%" />
+.left[<small>[*Gorgolewski, K. J., talk at NIH and MIT, January 2017](https://www.slideshare.net/chrisfilo1/towards-open-and-reproducible-neuroscience-in-the-age-of-big-data)</small>]
+
+---
+name: bidsapps3
+### data and BIDS
+
+#### BIDS apps - there's really an app for everything these days, isn't it?
+
+- just check the vast amount of divers BIDS apps at </br>
+  [http://bids-apps.neuroimaging.io](http://bids-apps.neuroimaging.io)
+
+<img src="images/bids-apps.png" width="100%" />
+
+---
+
+name: bidsapps4
+### data and BIDS
+
+#### BIDS apps - there's really an app for everything these days, isn't it?
+
+- we're going to (very) briefly talk about and check 4 amazingly useful </br> BIDS apps
+
+
+--
+- [MRIQC](http://mriqc.readthedocs.io/en/latest/)
+
+--
+- [FMRIPREP](http://fmriprep.readthedocs.io/en/latest/)
+
+--
+
+- [mindboggle](http://www.mindboggle.info)
+
+--
+
+- [C-PAC](http://fcp-indi.github.io/docs/user/index.html)
+
+---
+name: bidsapps5
+### data and BIDS
+
+#### BIDS apps - [MRIQC](http://mriqc.readthedocs.io/en/latest/)
+
+<img src="images/MRIQC_artefact_1.png" width="100%" />
+.left[<small>[*Esteban, O., FMRIPREP and MRIQC Focus at Stanford, January 2017](https://www.slideshare.net/OscarEsteban5/fmriprep-mriqc-focus-mriqc)</small>]
+
+---
+name: bidsapps6
+### data and BIDS
+
+#### BIDS apps - [MRIQC](http://mriqc.readthedocs.io/en/latest/)
+<img src="images/MRIQC_artefact_2.png" width="95%" />
+.left[<small>[*Esteban, O., FMRIPREP and MRIQC Focus at Stanford, January 2017](https://www.slideshare.net/OscarEsteban5/fmriprep-mriqc-focus-mriqc)</small>]
+
+---
+name: bidsapps7
+### data and BIDS
+
+#### BIDS apps - [MRIQC](http://mriqc.readthedocs.io/en/latest/)
+
+<img src="images/MRIQC_artefact_3.png" width="100%" />
+.left[<small>[*Esteban, O., FMRIPREP and MRIQC Focus at Stanford, January 2017](https://www.slideshare.net/OscarEsteban5/fmriprep-mriqc-focus-mriqc)</small>]
+
+---
+name: bidsapps8
+### data and BIDS
+
+#### BIDS apps - [MRIQC](http://mriqc.readthedocs.io/en/latest/)
+<img src="images/MRIQC_artefact_4.png" width="65%" />
+.left[<small>[*Esteban, O., FMRIPREP and MRIQC Focus at Stanford, January 2017](https://www.slideshare.net/OscarEsteban5/fmriprep-mriqc-focus-mriqc)</small>]
+
+---
+name: bidsapps9
+### data and BIDS
+
+#### BIDS apps - [MRIQC](http://mriqc.readthedocs.io/en/latest/)
+
+<img src="images/MRIQC_artefact_5.png" width="100%" />
+.left[<small>[*Esteban, O., FMRIPREP and MRIQC Focus at Stanford, January 2017](https://www.slideshare.net/OscarEsteban5/fmriprep-mriqc-focus-mriqc)</small>]
+
+---
+name: bidsapps10
+### data and BIDS
+
+#### BIDS apps - [MRIQC](http://mriqc.readthedocs.io/en/latest/)
+
+- What's the best option to assess, evaluate and control the quality of neuroimaging data?
+
+
+--
+- manually? --> time consuming, unreliable, inter-rater bias, intra-rater bias
+
+--
+- automated? --> major differences between algorithms
+
+--
+
+- both:
+
+--
+    - exclusion criteria should be as objective as possible
+
+    - vast variety of data acquisition and related problems (type of sequence, scanner type, scanner malfunction, head padding, participants (instructions))
+
+.left[<small>[*Esteban, O., FMRIPREP and MRIQC Focus at Stanford, January 2017](https://www.slideshare.net/OscarEsteban5/fmriprep-mriqc-focus-mriqc)</small>]
+---
+name: bidsapps11
+### data and BIDS
+
+#### BIDS apps - [MRIQC](http://mriqc.readthedocs.io/en/latest/)
+
+- MRIQC - quality control for structural and functional images
+
+--
+
+    - automated workflow
+
+    - extraction of structural and functional image quality metrics (IQMs):
+
+        - physical phantoms ([Price et al., 1990](http://dx.doi.org/10.1118/1.596566))
+
+        - no-reference image quality metrics ([Woodard and Carley-Spencer, 2006](http://doi.org/10.1385/NI:4:3:243))
+
+        - aim artifacts and analyze noise distribution ([Mortamet et al., 2009](http://doi.org/10.1002/mrm.21992))
+
+        - combined general volumetric and artifact-targeted IQMs ([Pizarro et al., 2016](https://doi.org/10.3389/fninf.2016.00052))
+
+--
+
+    - IQMs and visual reports per subject, as well as the whole group
+
+.left[<small>[*Esteban, O., FMRIPREP and MRIQC Focus at Stanford, January 2017](https://www.slideshare.net/OscarEsteban5/fmriprep-mriqc-focus-mriqc)</small>]
+---
+
+name: bidsapps12
+### data and BIDS
+
+#### BIDS apps - [MRIQC](http://mriqc.readthedocs.io/en/latest/)
+
+- MRIQC - quality control for structural and functional images
+
+<img src="images/MRIQC_design.png" width="80%" />
+.left[<small>[*Esteban, O., FMRIPREP and MRIQC Focus at Stanford, January 2017](https://www.slideshare.net/OscarEsteban5/fmriprep-mriqc-focus-mriqc)</small>]
+
+---
+name: bidsapps11
+### data and BIDS
+
+#### BIDS apps - [MRIQC](http://mriqc.readthedocs.io/en/latest/)
+
+- installing and running MRIQC
+
+--
+
+    - "bare-metal" installation (only python 3.*) - not recommended
+
+        - ``pip install -r \ https://raw.githubusercontent.com/poldracklab/mriqc/master/requirements.txt
+           pip install git+https://github.com/poldracklab/mriqc.git``
+
+        - dependencies: [FSL](https://fsl.fmrib.ox.ac.uk/fsl/fslwiki), [AFNI](https://afni.nimh.nih.gov), [ANTs](http://stnava.github.io/ANTs/)
+
+.left[<small>[*Esteban, O., FMRIPREP and MRIQC Focus at Stanford, January 2017](https://www.slideshare.net/OscarEsteban5/fmriprep-mriqc-focus-mriqc) and [MRIQC docs](https://mriqc.readthedocs.io/en/latest/install.html)</small>]
+
+---
+name: bidsapps12
+### data and BIDS
+
+#### BIDS apps - [MRIQC](http://mriqc.readthedocs.io/en/latest/)
+
+- installing and running MRIQC
+
+--
+
+    - docker version
+
+      - ``docker pull poldracklab/MRIQC``
+
+      - ``docker run -it --rm -v <bids_dir>:/data:ro -v <output_dir>:/out poldracklab/mriqc:latest /data /out participant``
+
+.left[<small>[*Esteban, O., FMRIPREP and MRIQC Focus at Stanford, January 2017](https://www.slideshare.net/OscarEsteban5/fmriprep-mriqc-focus-mriqc) and [MRIQC docs](https://mriqc.readthedocs.io/en/latest/docker.html)</small>]
+
+---
+name: bidsapps12
+### data and BIDS
+
+#### BIDS apps - [MRIQC](http://mriqc.readthedocs.io/en/latest/)
+
+- MRIQC - anatomical workflow
+
+--
+
+<img src="images/MRIQC_anat_workflow.svg" width="100%" />
+.left[<small>*[MRIQC docs](https://mriqc.readthedocs.io/en/latest/workflows.html), (C) Esteban, O. </small>]
+
+---
+name: bidsapps12
+### data and BIDS
+
+#### BIDS apps - [MRIQC](http://mriqc.readthedocs.io/en/latest/)
+
+- MRIQC - anatomical IQMs
+
+--
+
+<img src="images/MRIQC_structural_IQMs.png" width="80%" />
+.left[<small>*[Esteban, O., FMRIPREP and MRIQC Focus at Stanford, January 2017](https://www.slideshare.net/OscarEsteban5/fmriprep-mriqc-focus-mriqc)</small>]
+
+---
+name: mriqchandson
+
+.left-column[
+
+## Hands On
+## [MRIQC - I](http://mriqc.readthedocs.io/en/latest/)
+### ~5min
+]
+.right-column[
+Prerequisites:
+
+Please open this presentation on your machine to follow the hands on.
+
+We're gonna go through the example anatomical report from the [ABIDE dataset](http://fcon_1000.projects.nitrc.org/indi/abide/), which can be found [here](http://web.stanford.edu/group/poldracklab/mriqc/reports/anat_group.html).
+
+.left[<small>[*from MRIQC poldrack lab site](https://poldracklab.github.io/mriqc/)</small>]
+
+
+Subsequently, we're gonna check the reports of your own MRIQC command!
+
+]
+
+---
+name: bidsapps12
+### data and BIDS
+
+#### BIDS apps - [MRIQC](http://mriqc.readthedocs.io/en/latest/)
+
+- MRIQC - functional workflow
+
+--
+
+<img src="images/MRIQC_func_workflow.svg" width="100%" />
+.left[<small>*[MRIQC docs](https://mriqc.readthedocs.io/en/latest/workflows.html), (C) Esteban, O. </small>]
+
+---
+name: bidsapps12
+### data and BIDS
+
+#### BIDS apps - [MRIQC](http://mriqc.readthedocs.io/en/latest/)
+
+- MRIQC - functional IQMs
+
+--
+
+<img src="images/MRIQC_functional_IQMs.png" width="80%" />
+.left[<small>*[Esteban, O., FMRIPREP and MRIQC Focus at Stanford, January 2017](https://www.slideshare.net/OscarEsteban5/fmriprep-mriqc-focus-mriqc)</small>]
+
+---
+name: mriqchandson2
+
+.left-column[
+
+## Hands On
+## [MRIQC - II](http://mriqc.readthedocs.io/en/latest/)
+### ~5min
+]
+.right-column[
+Prerequisites:
+
+Please open this presentation on your machine to follow the hands on.
+
+We're gonna go through the example functional report from the [ABIDE dataset](http://fcon_1000.projects.nitrc.org/indi/abide/), which can be found [here](http://web.stanford.edu/group/poldracklab/mriqc/reports/func_group.html).
+
+.left[<small>[*from MRIQC poldrack lab site](https://poldracklab.github.io/mriqc/)</small>]
+
+
+Subsequently, we're gonna check the reports of your own MRIQC command!
+
+]
+
+---
+name: bidsapps12
+
+### data and BIDS
+
+#### BIDS apps - [MRIQC](http://mriqc.readthedocs.io/en/latest/)
+
+- MRIQC - classifier for T1w images
+
+--
+
+<img src="images/MRIQC_OHBM2017-poster.png" width="80%" />
+.left[<small>*[MRIQC docs](https://mriqc.readthedocs.io/en/latest/workflows.html), (C) Esteban, O., OHBM 2017</small>]
+
+---
+name: bidsapps12
+
+### data and BIDS
+
+#### BIDS apps - [MRIQC](http://mriqc.readthedocs.io/en/latest/)
+
+- MRIQC - classifier for T1w images
+
+ - MRIQC is released with two classifiers (already trained) to predict image quality of T1w images
+
+ - trained on [ABIDE](http://fcon_1000.projects.nitrc.org/indi/abide/) and [DS030](https://openfmri.org/dataset/ds000030/)
+
+ - predicts the quality labels (0=”accept”, 1=”reject”) on a features table computed by mriqc
+
+--
+
+ - the command itself: ``mriqc_clf --load-classifier -X aMRIQC.csv``
+
+   - where aMRIQC.csv is the file T1w.csv generated by the group level run of mriqc
+--
+
+ - also possible to build and train custom classifiers
+
+.left[<small>*[MRIQC docs](https://mriqc.readthedocs.io/en/latest/workflows.html), (C) Esteban, O. </small>]
+---
+name: bidsapps12
+
+### data and BIDS
+
+#### BIDS apps - [FMRIPREP](http://fmriprep.readthedocs.io/en/latest/index.html)
+
+- What is it?
+
+ - fMRI data preprocessing tool
+
+ - denoising and normalization
+
+--
+
+- What it is not
+
+ - GLM
+
+ - DCM
+
+ - connectivity
+
+ - dynamics
+
+ - etc.
+
+.left[<small>[*Gorgolewski, K. J., presentaion at Stanford, January 2017](https://www.slideshare.net/chrisfilo1/fmriprep-robust-and-easy-to-use-fmri-preprocessing-pipeline)</small>]
+---
+name: bidsapps12
+
+### data and BIDS
+
+#### BIDS apps - [FMRIPREP](http://fmriprep.readthedocs.io/en/latest/index.html)
+
+- FMRIPREP - principles
+
+--
+
+ - easy to install and use
+
+--
+
+ - state-of-the-art interface
+
+--
+
+ - robust to variations in scan acquisition protocols
+
+--
+
+ - minimal user input
+
+--
+
+ - easy interpretable and comprehensive error and output reporting
+
+--
+
+ - "glass" rather than "black" box
+
+
+.left[<small>[*Gorgolewski, K. J., presentaion at Stanford, January 2017](https://www.slideshare.net/chrisfilo1/fmriprep-robust-and-easy-to-use-fmri-preprocessing-pipeline)</small>]
+---
+name: bidsapps12
+
+### data and BIDS
+
+#### BIDS apps - [FMRIPREP](http://fmriprep.readthedocs.io/en/latest/index.html)
+
+- FMRIPREP - what's happening?
+
+--
+
+ - T1w processing
+
+    - N4 bias field correction (ANTs)
+
+    - skull stripping (ANTs)
+
+    - 3 class tissue segmentation (FSL FAST)
+
+    - robust mni coregistration (ANTs)
+--
+
+ - EPI processing
+
+    - motion correction (FSL MCFLIRT)
+
+    - skull stripping (nilearn)
+
+    - coregistration to T1 (FSL FLIRT with BBR)
+
+
+.left[<small>[*Gorgolewski, K. J., presentaion at Stanford, January 2017](https://www.slideshare.net/chrisfilo1/fmriprep-robust-and-easy-to-use-fmri-preprocessing-pipeline)</small>]
+---
+name: bidsapps12
+
+### data and BIDS
+
+#### BIDS apps - [FMRIPREP](http://fmriprep.readthedocs.io/en/latest/index.html)
+
+- FMRIPREP - what's happening?
+
+--
+
+ - transformations
+
+    - motion correction affines
+
+    - epi --> T1 affine
+
+    - T1 --> MNI affine
+
+    - T1 --> MNI wrap field
+
+    - single interpolation step
+
+    - no upsampling (keeping original voxel size)
+
+.left[<small>[*Gorgolewski, K. J., presentaion at Stanford, January 2017](https://www.slideshare.net/chrisfilo1/fmriprep-robust-and-easy-to-use-fmri-preprocessing-pipeline)</small>]
+---
+name: bidsapps12
+
+### data and BIDS
+
+#### BIDS apps - [FMRIPREP](http://fmriprep.readthedocs.io/en/latest/index.html)
+
+- FMRIPREP - what's happening?
+
+--
+
+ - confounds
+
+    - DVARS
+
+    - framewise displacement
+
+    - global signal
+
+    - mean tissue signals
+
+    - CompCor (temporal and anatomical)
+--
+
+ - reports
+
+    - quality assesment
+
+.left[<small>[*Gorgolewski, K. J., presentaion at Stanford, January 2017](https://www.slideshare.net/chrisfilo1/fmriprep-robust-and-easy-to-use-fmri-preprocessing-pipeline)</small>]
+---
+name: bidsapps12
+
+### data and BIDS
+
+#### BIDS apps - [FMRIPREP](http://fmriprep.readthedocs.io/en/latest/index.html)
+
+- FMRIPREP - how to get it, how to run it
+
+--
+
+    - "bare-metal" installation - not recommended
+
+       - pip install fmriprep
+
+       - dependencies: [FSL](https://fsl.fmrib.ox.ac.uk/fsl/fslwiki), [AFNI](https://afni.nimh.nih.gov), [ANTs](http://stnava.github.io/ANTs/), [C3D](https://sourceforge.net/projects/c3d/), [FreeSurfer](https://surfer.nmr.mgh.harvard.edu), [ICA-AROMA](https://github.com/maartenmennes/ICA-AROMA)
+
+--
+
+    - docker version
+
+       - docker pull poldracklab/fmriprep
+
+       - docker run -ti --rm \ </br>
+         -v filepath/to/data/dir:/data:ro \ </br>
+         -v filepath/to/output/dir:/out \ </br>
+         poldracklab/fmriprep:latest \ </br>
+         /data /out/out \ </br>
+         participant
+
+.left[<small>[*Gorgolewski, K. J., presentaion at Stanford, January 2017](https://www.slideshare.net/chrisfilo1/fmriprep-robust-and-easy-to-use-fmri-preprocessing-pipeline)</small>]
+---
+name: bidsapps12
+
+### data and BIDS
+
+#### BIDS apps - [FMRIPREP](http://fmriprep.readthedocs.io/en/latest/index.html)
+
+- FMRIPREP - outputs
+
+--
+
+ - T1w
+
+    - bias corrected volume
+
+    - brain mask
+
+    - global signal
+
+    - tissue segmentation (+probability map)
+
+    - affine and warp to MNI (both ways)
+
+.left[<small>[*Gorgolewski, K. J., presentaion at Stanford, January 2017](https://www.slideshare.net/chrisfilo1/fmriprep-robust-and-easy-to-use-fmri-preprocessing-pipeline)</small>]
+---
+name: bidsapps12
+
+### data and BIDS
+
+#### BIDS apps - [FMRIPREP](http://fmriprep.readthedocs.io/en/latest/index.html)
+
+- FMRIPREP - outputs
+
+--
+
+ - epi
+
+    - motion corrected images
+
+    - brain mask
+
+    - affine T1w
+
+    - tabular text file with all noise confoudnds
+
+    - all volumes in MNI and native (epi) space
+
+.left[<small>[*Gorgolewski, K. J., presentaion at Stanford, January 2017](https://www.slideshare.net/chrisfilo1/fmriprep-robust-and-easy-to-use-fmri-preprocessing-pipeline)</small>]
+---
+name: bidsapps12
+
+### data and BIDS
+
+#### BIDS apps - [FMRIPREP](http://fmriprep.readthedocs.io/en/latest/index.html)
+
+- FMRIPREP - outputs
+
+--
+
+ - let's check an [example report](http://fmriprep.readthedocs.io/en/latest/_static/sample_report.html) from the FMRIPREP docs
+
+--
+
+ - additionally, the [AROMA component classification](http://fmriprep.readthedocs.io/en/latest/_images/aroma.svg)
+
+.left-column[
+
+## Hands On
+## [FMRIPREP](http://fmriprep.readthedocs.io/en/latest/index.html)
+### ~5min
+]
+.right-column[
+Prerequisites:
+
+- workshop docker container up and running
+
+
+Subsequently, use "tree" together with [FMRIPREP's docs](http://fmriprep.readthedocs.io/en/latest/outputs.html) to inspect FMRIPREP's comprehensive output!
+
+]
+
+.left[<small>[*FMRIPREP docs](http://fmriprep.readthedocs.io/en/latest/index.html)</small>]
+---
+name: bidsapps12
+
+### data and BIDS
+
+#### BIDS apps - [mindboggle](http://www.mindboggle.info)
+
+<img src="images/mindboggle_1.png" width="90%" />
+<img src="images/mindboggle_2.png" width="90%" />
+
+.left[<small>*[mindboggle docs](http://www.mindboggle.info)</small>]
+
+---
+name: bidsapps12
+
+### data and BIDS
+
+#### BIDS apps - [mindboggle](http://www.mindboggle.info) - who that?
+
+- a comprehensive and extensive pipeline for structural images
+
+- computes & outputs volume, surface, and tabular data containing label, feature, and shape information for further analysis
+
+- <img src="images/mindboggle_outputs.png" width="90%" />
+
+- FreeSurfer (recon-all) > ANTs (antsCorticalThickness) > mindboggle
+
+.left[<small>*[mindboggle docs](http://www.mindboggle.info) & [mindboggle paper](https://doi.org/10.1371/journal.pcbi.1005350)</small>]
+
+---
+name: bidsapps12
+
+### data and BIDS
+
+#### BIDS apps - [mindboggle](http://www.mindboggle.info) - the pipeline
+
+<img src="images/mindboggle_workflow_1.png" width="90%" />
+
+.left[<small>*[mindboggle docs](http://www.mindboggle.info) & [mindboggle paper](https://doi.org/10.1371/journal.pcbi.1005350)</small>]
+
+---
+name: bidsapps12
+
+### data and BIDS
+
+#### BIDS apps - [mindboggle](http://www.mindboggle.info) - the pipeline
+
+<img src="images/mindboggle_workflow_2.png" width="90%" />
+
+.left[<small>*[mindboggle docs](http://www.mindboggle.info) & [mindboggle paper](https://doi.org/10.1371/journal.pcbi.1005350)</small>]
+
+---
+name: bidsapps12
+
+### data and BIDS
+
+#### BIDS apps - [mindboggle](http://www.mindboggle.info) - the pipeline
+
+<img src="images/mindboggle_workflow_3.png" width="90%" />
+
+.left[<small>*[mindboggle docs](http://www.mindboggle.info) & [mindboggle paper](https://doi.org/10.1371/journal.pcbi.1005350)</small>]
+
+---
+name: bidsapps12
+
+### data and BIDS
+
+#### BIDS apps - [mindboggle](http://www.mindboggle.info) - the pipeline
+
+<img src="images/mindboggle_workflow_4.png" width="90%" />
+
+
+.left[<small>*[mindboggle docs](http://www.mindboggle.info) & [mindboggle paper](https://doi.org/10.1371/journal.pcbi.1005350)</small>]
+
+---
+name: bidsapps12
+
+### data and BIDS
+
+#### BIDS apps - [mindboggle](http://www.mindboggle.info) - the pipeline
+
+<img src="images/mindboggle_workflow_5.png" width="90%" />
+
+
+.left[<small>*[mindboggle docs](http://www.mindboggle.info) & [mindboggle paper](https://doi.org/10.1371/journal.pcbi.1005350)</small>]
+
+---
+name: bidsapps12
+
+### data and BIDS
+
+#### BIDS apps - [mindboggle](http://www.mindboggle.info) - the pipeline
+
+<img src="images/mindboggle_workflow_6.png" width="90%" />
+
+
+.left[<small>*[mindboggle docs](http://www.mindboggle.info) & [mindboggle paper](https://doi.org/10.1371/journal.pcbi.1005350)</small>]
+
+---
+name: bidsapps12
+
+### data and BIDS
+
+#### BIDS apps - [mindboggle](http://www.mindboggle.info) - the pipeline
+
+<img src="images/mindboggle_workflow_7.png" width="90%" />
+
+
+.left[<small>*[mindboggle docs](http://www.mindboggle.info) & [mindboggle paper](https://doi.org/10.1371/journal.pcbi.1005350)</small>]
+
+---
+name: bidsapps12
+
+### data and BIDS
+
+#### BIDS apps - [mindboggle](http://www.mindboggle.info) - the pipeline
+
+<img src="images/mindboggle_workflow_8.png" width="90%" />
+
+
+.left[<small>*[mindboggle docs](http://www.mindboggle.info) & [mindboggle paper](https://doi.org/10.1371/journal.pcbi.1005350)</small>]
+
+---
+name: bidsapps12
+
+### data and BIDS
+
+#### BIDS apps - [mindboggle](http://www.mindboggle.info) - how to?
+
+- get the docker image
+
+    - docker pull bids/mindboggle
+
+--
+
+- run it
+
+    - docker run -ti -v  \ </br> $path/to/data:/home/jovyan/work/data  \ </br> bids/mindboggle  \ </br> /home/jovyan/work/data  \ </br> /home/jovyan/work/data/derivatives/  \ </br> participant
+
+- attention!
+
+    - high computational cost (recon-all alone usually 8-24 or more hours (depending on your machine))
+    - one might have to increase the memory allocated by docker (to at least 5GB)
+    - maybe don't run the complete pipeline on your laptop
+
+.left[<small>*[mindboggle docs](http://www.mindboggle.info) & [mindboggle paper](https://doi.org/10.1371/journal.pcbi.1005350)</small>]
+
+---
+name: bidsapps12
+
+### data and BIDS
+
+#### BIDS apps - [C-PAC](https://fcp-indi.github.io)
+
+.center[<img src="images/cpac_logo.png" width="60%" />]
+
+.left[<small>*[cpac docs](http://fcp-indi.github.io/docs/user/index.html)</small>]
+
+---
+name: bidsapps12
+
+### data and BIDS
+
+#### BIDS apps - [C-PAC](https://fcp-indi.github.io) - who that?
+
+- pipeline to automate preprocessing and analysis of large-scale datasets
+
+- most cutting edge functional connectivity preprocessing and analysis algorithms
+
+- configurable to enable “plurality” – evaluate different processing parameters and strategies
+
+- automatically identifies and takes advantage of parallelism on multi-threaded, multi-core, and cluster architectures
+
+- “warm restarts” – only re-compute what has changed
+
+- open science – open source
+
+.left[<small>*[cpac docs](http://fcp-indi.github.io/docs/user/index.html)</small>]
+
+---
+name: bidsapps12
+
+### data and BIDS
+
+#### BIDS apps - [C-PAC](https://fcp-indi.github.io) - possibilities
+
+.center[<img src="images/cpac_processing.png" width="100%" />]
+
+.left[<small>*[cpac docs](http://fcp-indi.github.io/docs/user/index.html)</small>]
+
+---
+name: bidsapps12
+
+### data and BIDS
+
+#### BIDS apps - [C-PAC](https://fcp-indi.github.io) - how to?
+
+- get the docker image
+
+    - docker pull bids/cpac
+
+--
+
+- run it
+
+    - docker run -ti  \ </br> -v /tmp:/scratch  \ </br> -v /path/to/data:/bids_dataset  \ </br> -v /path/to/outputs:/outputs  \ </br> bids/cpac  \ </br> /bids_dataset /outputs participant
+
+- run it with the GUI (requires mapping your X socket)
+
+    - add the following at the beginning of the docker command
+
+    - --privileged \
+        -e DISPLAY=$IP:0 \
+        -v /tmp/.X11-unix:/tmp/.X11-unix
+
+.left[<small>*[cpac docs](http://fcp-indi.github.io/docs/user/index.html)</small>]
+
+---
+class: center, middle
+name: bidsapps12
+
+###wrote an awesome workflow and/or want to make your research reproducible? </br>
+###make your own BIDS app and/or docker image
+
+--
+
+### sounds cool, but I'm not profienct enough / I have a hard time becoming active
+
+--
+### Well, say no more...
+
+---
+name: bidsapps12
+
+### data and BIDS... AND docker
+
+#### [neurodocker](https://github.com/kaczmarj/neurodocker) & [porcupine](https://timvanmourik.github.io/Porcupine/)
+
+- neurodocker is a Python project that generates custom dockerfiles for neuroimaging and minifies existing docker images
+
+    - get it via docker pull kaczmarj/neurodocker:v0.3.1
+
+    - go ahead and build your own image:
+
+    docker run --rm kaczmarj/neurodocker:v0.3.2 generate \
+
+    -- "base" (ubuntu, neurodebian, etc.)
+
+    -- program 1 (e.g. apt, git)
+
+    -- program 2 (e.g. FSL, AFNI)
+
+    -- python-env (e.g. python3.6, numpy, nipype)
+
+    -- user & env settings (e.g. working dir)
+
+.left[<small>*[neurodocker docs](https://github.com/kaczmarj/neurodocker)</small>]
+
+---
+name: bidsapps12
+
+### data and BIDS... AND docker
+
+#### [neurodocker](https://github.com/kaczmarj/neurodocker) & [porcupine](https://timvanmourik.github.io/Porcupine/)
+
+- neurodocker is a Python project that generates custom dockerfiles for neuroimaging and minifies existing docker images
+
+    - an example usage of neurodocker:
+
+<img src="images/neurodocker_example.png" width="100%"/>
+
+---
+### data and BIDS... AND docker
+
+#### [neurodocker](https://github.com/kaczmarj/neurodocker) & [porcupine](https://timvanmourik.github.io/Porcupine/)
+
+- neurodocker is a Python project that generates custom dockerfiles for neuroimaging and minifies existing docker images
+
+.left-column[
+
+## Hands On
+## [neurodocker](https://github.com/kaczmarj/neurodocker)
+### ~5min
+]
+.right-column[
+
+- go ahead and build your first own docker image
+
+    - open a terminal
+
+    - create and build a minimal docker image, containing neurodebian:
+
+    docker run --rm \ </br> kaczmarj/neurodocker:master generate \ </br> -b neurodebian:stretch-non-free \ </br> -p apt \ </br> | docker build -
+
+]
+---
+name: bidsapps12
+
+### data and BIDS... AND docker
+
+#### [neurodocker](https://github.com/kaczmarj/neurodocker) & [porcupine](https://timvanmourik.github.io/Porcupine/)
+
+- more the visual type and/or want to know a great teaching/practice tool?
+
+--
+<img src="images/porcupine.png" width="100%"/>
+
+.left[<small>*[by Tim van Mourik](https://github.com/TimVanMourik/Porcupine), check the [Porcupine preprint here](https://www.biorxiv.org/content/early/2017/09/12/187344) </small>]
+
+
+---
+name: bidsapps12
+
+### data and BIDS... AND docker
+
+#### [neurodocker](https://github.com/kaczmarj/neurodocker) & [porcupine](https://timvanmourik.github.io/Porcupine/)
+
+.left-column[
+
+## Hands On
+## [porcupine](https://github.com/TimVanMourik/Porcupine)
+### ~5min
+]
+.right-column[
+
+- go ahead and play around with porcupine, maybe recreating your standard pipeline
+
+    - get it via docker pull timvanmourik/porcupine or the [installer files](https://github.com/TimVanMourik/Porcupine/releases/tag/1.4.0)
+
+    - start the application
+
+    - porcupine via docker (requires mapping your X socket)
+
+    docker run --rm -ti \ </br> --privileged -e DISPLAY=$IP:0 \ </br> -v /tmp/.X11-unix:/tmp.X11-unix \ </br> timvanmourik/porcupine
+
+]
+---
+name: bidsapps12
+
+### data and BIDS
+
+#### [PyBIDS](https://github.com/INCF/pybids)
+
+- a Python library to centralize interactions with datasets conforming BIDS (Brain Imaging Data Structure) format
+
+--
+
+.left-column[
+
+## Hands On
+## [PyBIDS](https://github.com/INCF/pybids)
+### ~5min
+]
+.right-column[
+
+- please go through the nipype_tutorial/notebooks/basic_data_input_bids.ipynb notebook
+
+]
+
+
+---
+class: center, middle
+name: bidsapps12
+
+##cool data, now get it out there!
+
+---
+class: center, middle
+name: bidsapps12
+
+##but, my data is too precious...
+
+---
+class: center, middle
+name: bidsapps12
+
+##never go full gollum on your data
+
+--
+
+# make more data accessible to more researchers
+
+###(for the already discussed reasons)
+
+---
+name: bidsapps12
+
+##[openneuro](https://openneuro.org) and ...
+
+---
+layout: true
+class: center, middle, inverse
+---
+name: questions
+
+# Questions?
+
+    </textarea>
+    <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js" type="text/javascript">
+    </script>
+    <script>
+      var hljs = remark.highlighter.engine;
+    </script>
+    <script src="remark.language.js"></script>
+    <script>
+      var slideshow = remark.create({
+          highlightStyle: 'monokai',
+          highlightLanguage: 'remark',
+          highlightLines: true
+        }) ;
+    </script>
+    <script>
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-1placeholder8-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script');
+        ga.src = 'https://ssl.google-analytics.com/ga.js';
+        var s = document.scripts[0];
+        s.parentNode.insertBefore(ga, s);
+      }());
+    </script>
+  </body>
+</html>
